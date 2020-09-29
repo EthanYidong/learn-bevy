@@ -32,7 +32,7 @@ fn main() {
         .add_startup_system(setup.system())
         .add_system(player_control.system())
         .add_system(laser_move.system())
-        .add_system_to_stage(stage::POST_UPDATE, weapons.system())
+        .add_system(weapons.system())
         .run();
 }
 
@@ -82,7 +82,7 @@ fn player_control(
     for (player, mut transform, weapon) in &mut query.iter() {
         transform.translate(Vec3::new(movement * player.speed * time.delta_seconds, 0.0, 0.0));
         if let Some(mut w) = weapon {
-            w.fired = weapon_fired;
+            w.fired = weapon_fired || w.fired;
         }
     }
 }
