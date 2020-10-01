@@ -1,0 +1,20 @@
+[package]
+name = "bevy-03"
+version = "0.1.0"
+authors = ["EthanYidong <ethanyidong@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = {version = "0.2", features = ["profiler"]}
+derive_deref = "1.1"
+
+[profile.dev]
+opt-level = 3
+debug = false
+
+# But compile the project itself in debug mode if `--release` is not passed in
+[profile.dev.package.bevy-03]
+opt-level = 0
+debug = true
